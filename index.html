@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -983,7 +984,7 @@
             } catch (e) {
                 // Capturar cualquier error en la inicialización y notificar
                 console.error("Error fatal durante la inicialización:", e);
-                alert("Error fatal durante la inicialización. Revisa la consola para más detalles.");
+                // NOTA: Se ha quitado el 'alert' para que no interrumpa el usuario.
             }
         });
 
@@ -1470,9 +1471,7 @@
             const intFrag = calculateInternalFragmentation();
             const blocked = state.processes.filter(p => p.state === 'new').length;
             
-            // Aquí se corregía el error:
-            // document.getElementById('detailEfficiency').textContent = `${efficiency > 0 ? efficiency : 0}%`; 
-            // La línea anterior causaba un error porque 'detailEfficiency' no existe en el HTML.
+            // Se corrige el error al evitar llamar a 'detailEfficiency'
             
             document.getElementById('detailAvgWait').textContent = `${avgWait} ms`;
             document.getElementById('detailExtFrag').textContent = `${extFrag}%`;
