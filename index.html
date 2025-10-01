@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,17 +7,17 @@
     <title>Simulador de Gestión de Memoria</title>
     <style>
         :root {
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #151520;
-            --bg-tertiary: #1e1e2e;
-            --accent-primary: #5d5dff;
-            --accent-secondary: #7a7aff;
-            --text-primary: #e0e0e0;
-            --text-secondary: #a0a0b0;
-            --success: #2ecc71;
-            --warning: #f39c12;
-            --danger: #e74c3c;
-            --border: #2a2a3a;
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --bg-tertiary: #3a3a3a;
+            --accent-primary: #4a6fa5;
+            --accent-secondary: #6b8cbc;
+            --text-primary: #e8e8e8;
+            --text-secondary: #b0b0b0;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --border: #404040;
             --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
         
@@ -28,10 +29,11 @@
         }
         
         body {
-            background: linear-gradient(135deg, var(--bg-primary) 0%, #121218 100%);
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #252525 100%);
             color: var(--text-primary);
             line-height: 1.6;
-            min-height: 100vh;
+            overflow: hidden;
+            height: 100vh;
             padding: 16px;
         }
         
@@ -40,105 +42,8 @@
             grid-template-columns: 1fr 1fr;
             grid-template-rows: auto 1fr;
             gap: 20px;
+            height: 100%;
             max-height: 100vh;
-        }
-        
-        /* Estilos para móviles */
-        @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto auto auto;
-                gap: 16px;
-            }
-            
-            body {
-                padding: 12px;
-                overflow-y: auto;
-                height: auto;
-            }
-            
-            header {
-                flex-direction: column;
-                gap: 16px;
-                padding: 16px;
-            }
-            
-            .controls {
-                justify-content: center;
-            }
-            
-            button {
-                padding: 12px 16px;
-                font-size: 14px;
-            }
-            
-            .config-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .process-queues {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-            
-            .metrics {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-            
-            .tab-container {
-                margin-top: 12px;
-            }
-            
-            .tabs {
-                flex-wrap: wrap;
-            }
-            
-            .tab {
-                flex: 1;
-                min-width: 120px;
-                text-align: center;
-                padding: 10px 12px;
-                font-size: 14px;
-            }
-            
-            .memory-viz {
-                height: 100px;
-            }
-            
-            .card-content {
-                padding: 16px;
-            }
-            
-            h1 {
-                font-size: 1.5rem;
-                text-align: center;
-            }
-            
-            .queue {
-                min-height: auto;
-            }
-            
-            .queue-title {
-                cursor: pointer;
-                user-select: none;
-            }
-            
-            .queue-content {
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.3s ease;
-            }
-            
-            .queue-content.expanded {
-                max-height: 300px;
-            }
-        }
-        
-        @media (min-width: 769px) {
-            .queue-content {
-                display: block !important;
-            }
         }
         
         header {
@@ -169,7 +74,7 @@
             justify-content: center;
             font-weight: bold;
             font-size: 18px;
-            box-shadow: 0 4px 10px rgba(93, 93, 255, 0.3);
+            box-shadow: 0 4px 10px rgba(74, 111, 165, 0.3);
         }
         
         h1 {
@@ -231,12 +136,12 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 10px rgba(93, 93, 255, 0.2);
+            box-shadow: 0 4px 10px rgba(74, 111, 165, 0.2);
         }
         
         button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(93, 93, 255, 0.3);
+            box-shadow: 0 6px 15px rgba(74, 111, 165, 0.3);
         }
         
         button:active {
@@ -252,15 +157,15 @@
         }
         
         .btn-success {
-            background: linear-gradient(135deg, var(--success), #27ae60);
+            background: linear-gradient(135deg, var(--success), #388e3c);
         }
         
         .btn-warning {
-            background: linear-gradient(135deg, var(--warning), #e67e22);
+            background: linear-gradient(135deg, var(--warning), #f57c00);
         }
         
         .btn-danger {
-            background: linear-gradient(135deg, var(--danger), #c0392b);
+            background: linear-gradient(135deg, var(--danger), #d32f2f);
         }
         
         select, input {
@@ -276,7 +181,7 @@
         
         select:focus, input:focus {
             border-color: var(--accent-primary);
-            box-shadow: 0 0 0 2px rgba(93, 93, 255, 0.2);
+            box-shadow: 0 0 0 2px rgba(74, 111, 165, 0.2);
         }
         
         .memory-viz {
@@ -353,11 +258,11 @@
         }
         
         .process-new {
-            background: linear-gradient(135deg, var(--warning), #e67e22);
+            background: linear-gradient(135deg, var(--warning), #f57c00);
         }
         
         .process-ready {
-            background: linear-gradient(135deg, var(--success), #27ae60);
+            background: linear-gradient(135deg, var(--success), #388e3c);
         }
         
         .process-running {
@@ -419,7 +324,7 @@
         }
         
         .log-entry:hover {
-            background: rgba(93, 93, 255, 0.05);
+            background: rgba(74, 111, 165, 0.05);
         }
         
         .log-warning {
@@ -451,7 +356,7 @@
         }
         
         tr:hover {
-            background: rgba(93, 93, 255, 0.05);
+            background: rgba(74, 111, 165, 0.05);
         }
         
         .config-grid {
@@ -489,7 +394,7 @@
         }
         
         .tab:hover {
-            background: rgba(93, 93, 255, 0.1);
+            background: rgba(74, 111, 165, 0.1);
         }
         
         .tab.active {
@@ -640,7 +545,7 @@
         
         .btn-qr:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(93, 93, 255, 0.3);
+            box-shadow: 0 6px 15px rgba(74, 111, 165, 0.3);
         }
         
         .mobile-info {
@@ -672,6 +577,45 @@
             content: "•";
             color: var(--accent-primary);
             font-weight: bold;
+        }
+        
+        /* Nueva sección de comparación de métricas */
+        .comparison-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        
+        .comparison-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .comparison-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .comparison-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .comparison-table {
+            overflow-x: auto;
+        }
+        
+        .comparison-table table {
+            min-width: 800px;
+        }
+        
+        .simulation-id {
+            font-weight: bold;
+            color: var(--accent-primary);
         }
         
         /* Scrollbar personalizado */
@@ -723,6 +667,14 @@
                     </svg>
                     Configuración
                 </button>
+                <button id="btnSaveReport">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                        <polyline points="7 3 7 8 15 8"></polyline>
+                    </svg>
+                    Guardar Informe
+                </button>
             </div>
         </header>
         
@@ -768,7 +720,6 @@
                     <button id="btnPause" class="btn-warning" disabled>Pausar</button>
                     <button id="btnReset" class="btn-danger">Reiniciar</button>
                     <button id="btnStressTest">Prueba de Estrés</button>
-                    <button id="btnSaveMetrics" class="btn-warning">Guardar Métricas</button>
                 </div>
                 
                 <div class="memory-viz" id="memoryVisualization">
@@ -799,32 +750,32 @@
             <div class="card-content">
                 <div class="process-queues">
                     <div class="queue">
-                        <div class="queue-title" data-queue="new">
+                        <div class="queue-title">
                             <span class="status-indicator" style="background: var(--warning);"></span>
                             Nuevos
                         </div>
-                        <div class="queue-content" id="queueNew"></div>
+                        <div id="queueNew"></div>
                     </div>
                     <div class="queue">
-                        <div class="queue-title" data-queue="ready">
+                        <div class="queue-title">
                             <span class="status-indicator" style="background: var(--success);"></span>
                             Listos
                         </div>
-                        <div class="queue-content" id="queueReady"></div>
+                        <div id="queueReady"></div>
                     </div>
                     <div class="queue">
-                        <div class="queue-title" data-queue="running">
+                        <div class="queue-title">
                             <span class="status-indicator" style="background: var(--accent-primary);"></span>
                             Ejecutando
                         </div>
-                        <div class="queue-content" id="queueRunning"></div>
+                        <div id="queueRunning"></div>
                     </div>
                     <div class="queue">
-                        <div class="queue-title" data-queue="terminated">
+                        <div class="queue-title">
                             <span class="status-indicator" style="background: var(--bg-tertiary);"></span>
                             Terminados
                         </div>
-                        <div class="queue-content" id="queueTerminated"></div>
+                        <div id="queueTerminated"></div>
                     </div>
                 </div>
                 
@@ -881,38 +832,49 @@
                                 <div class="metric-value" id="detailBlocked">0</div>
                             </div>
                             <div class="metric">
-                                <div>Tasa de Rechazo</div>
-                                <div class="metric-value" id="detailRejectionRate">0%</div>
+                                <div>Eficiencia Memoria</div>
+                                <div class="metric-value" id="detailEfficiency">0%</div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="tab-content" id="tabComparison">
-                        <h4>Historial de Resultados</h4>
-                        <button id="btnClearComparison" class="btn-danger" style="margin-bottom: 15px;">Limpiar Historial</button>
-                        <table id="comparisonTable">
-                            <thead>
-                                <tr>
-                                    <th>Modo</th>
-                                    <th>Algoritmo</th>
-                                    <th>T. Espera Prom. (ms)</th>
-                                    <th>Frag. Externa (%)</th>
-                                    <th>Frag. Interna (%)</th>
-                                    <th>Rechazo (%)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td colspan="6" class="empty-state">Guarda las métricas al finalizar una simulación para comparar.</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="comparison-section">
+                            <div class="comparison-header">
+                                <div class="comparison-title">Comparación de Simulaciones</div>
+                                <div class="comparison-controls">
+                                    <button id="btnClearHistory" class="btn-danger">Limpiar Historial</button>
+                                </div>
+                            </div>
+                            <div class="comparison-table">
+                                <table id="comparisonTable">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Fecha</th>
+                                            <th>Algoritmo</th>
+                                            <th>Uso Memoria</th>
+                                            <th>Fragmentación</th>
+                                            <th>Procesos Completados</th>
+                                            <th>Tiempo Promedio</th>
+                                            <th>Eficiencia</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="8" class="empty-state">No hay simulaciones para comparar</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Modal QR -->
     <div class="modal-overlay" id="qrModal">
         <div class="modal">
             <div class="modal-header">
@@ -960,93 +922,42 @@
                 completedProcesses: 0,
                 totalMemoryUsed: 0,
                 totalFragmentation: 0,
-                measurements: 0,
-                // Nuevas métricas para rechazo
-                allocationAttempts: 0,
-                failedAllocations: 0
+                measurements: 0
             },
-            // Nuevo array para almacenar resultados de comparación
-            comparisonResults: []
+            simulationHistory: [],
+            currentSimulationId: null
         };
 
         // Inicialización
         document.addEventListener('DOMContentLoaded', function() {
-            try {
-                initializeSystem();
-                setupEventListeners(); // Esto adjunta los eventos
-                addLog('Sistema inicializado correctamente', 'success');
-                
-                // Configurar colapsado de colas en móviles
-                setupMobileQueues();
-                
-                // Cargar resultados de comparación si existen
-                loadComparisonResults();
-            } catch (e) {
-                // Capturar cualquier error en la inicialización y notificar
-                console.error("Error fatal durante la inicialización:", e);
-                // NOTA: Se ha quitado el 'alert' para que no interrumpa el usuario.
-            }
+            loadSimulationHistory();
+            initializeSystem();
+            setupEventListeners();
+            addLog('Sistema inicializado correctamente', 'success');
         });
 
-        function loadComparisonResults() {
-            const storedResults = localStorage.getItem('comparisonResults');
-            if (storedResults) {
-                state.comparisonResults = JSON.parse(storedResults);
-                updateComparisonTable();
-            }
-        }
-
-        function saveComparisonResults() {
-            localStorage.setItem('comparisonResults', JSON.stringify(state.comparisonResults));
-        }
-
-        function setupMobileQueues() {
-            // Solo en dispositivos móviles
-            if (window.innerWidth <= 768) {
-                document.querySelectorAll('.queue-title').forEach(title => {
-                    title.addEventListener('click', function() {
-                        const queueType = this.getAttribute('data-queue');
-                        const content = document.getElementById(`queue${queueType.charAt(0).toUpperCase() + queueType.slice(1)}`);
-                        content.classList.toggle('expanded');
-                    });
-                });
-            }
-        }
-
         function setupEventListeners() {
-            // Se usa una función auxiliar para adjuntar eventos de forma segura
-            const attach = (id, func) => {
-                const element = document.getElementById(id);
-                if (element) {
-                    element.addEventListener('click', func);
-                } else {
-                    console.warn(`Elemento con ID '${id}' no encontrado.`);
-                }
-            };
-
             // Botones de control
-            attach('btnApplyConfig', function() {
+            document.getElementById('btnApplyConfig').addEventListener('click', function() {
                 initializeSystem();
                 addLog('Configuración aplicada correctamente', 'success');
             });
             
-            attach('btnAddProcess', addRandomProcess);
-            attach('btnStart', startSimulation);
-            attach('btnPause', pauseSimulation);
-            attach('btnReset', resetSimulation);
-            attach('btnStressTest', runStressTest);
-            attach('btnConfig', showConfigMessage);
+            document.getElementById('btnAddProcess').addEventListener('click', addRandomProcess);
+            document.getElementById('btnStart').addEventListener('click', startSimulation);
+            document.getElementById('btnPause').addEventListener('click', pauseSimulation);
+            document.getElementById('btnReset').addEventListener('click', resetSimulation);
+            document.getElementById('btnStressTest').addEventListener('click', runStressTest);
+            document.getElementById('btnConfig').addEventListener('click', showConfigMessage);
+            document.getElementById('btnSaveReport').addEventListener('click', saveReport);
+            document.getElementById('btnClearHistory').addEventListener('click', clearSimulationHistory);
             
-            // Nuevos botones de comparación
-            attach('btnSaveMetrics', saveCurrentMetricsForComparison);
-            attach('btnClearComparison', clearComparisonHistory);
-
             // Botón QR
-            attach('btnQR', openQRModal);
-            attach('closeQR', closeQRModal);
+            document.getElementById('btnQR').addEventListener('click', openQRModal);
+            document.getElementById('closeQR').addEventListener('click', closeQRModal);
             
             // Cerrar modal al hacer clic fuera
-            document.getElementById('qrModal')?.addEventListener('click', function(e) {
+            document.getElementById('qrModal').addEventListener('click', function(e) {
                 if (e.target === this) {
                     closeQRModal();
                 }
@@ -1064,66 +975,7 @@
                     // Activar pestaña seleccionada
                     this.classList.add('active');
                     document.getElementById('tab' + capitalizeFirst(tabId)).classList.add('active');
-
-                    // Si se activa la pestaña de comparación, actualizar la tabla
-                    if (tabId === 'comparison') {
-                        updateComparisonTable();
-                    }
                 });
-            });
-        }
-
-        function saveCurrentMetricsForComparison() {
-            if (state.metrics.completedProcesses === 0) {
-                addLog('No hay procesos completados para guardar métricas significativas.', 'error');
-                return;
-            }
-
-            const avgWait = state.metrics.completedProcesses > 0 ? 
-                Math.round(state.metrics.totalWaitTime / state.metrics.completedProcesses) : 0;
-            
-            const result = {
-                timestamp: new Date().toLocaleString(),
-                mode: document.getElementById('memoryMode').value === 'paging' ? 'Paginación' : 'Compactación',
-                algorithm: document.getElementById('algorithm').value,
-                avgWait: avgWait,
-                extFrag: calculateExternalFragmentation(), // Valor actual
-                intFrag: calculateInternalFragmentation(), // Valor actual
-                rejectionRate: calculateRejectionRate()
-            };
-
-            state.comparisonResults.push(result);
-            saveComparisonResults();
-            updateComparisonTable();
-            addLog(`Métricas guardadas para ${result.mode} con ${result.algorithm}. Total de resultados: ${state.comparisonResults.length}`, 'success');
-        }
-
-        function clearComparisonHistory() {
-            if (confirm('¿Estás seguro de que quieres borrar todo el historial de comparación?')) {
-                state.comparisonResults = [];
-                saveComparisonResults();
-                updateComparisonTable();
-                addLog('Historial de comparación borrado.', 'danger');
-            }
-        }
-
-        function updateComparisonTable() {
-            const tableBody = document.querySelector('#comparisonTable tbody');
-            tableBody.innerHTML = '';
-            
-            if (state.comparisonResults.length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="6" class="empty-state">Guarda las métricas al finalizar una simulación para comparar.</td></tr>';
-                return;
-            }
-            
-            state.comparisonResults.forEach(result => {
-                const row = tableBody.insertRow();
-                row.insertCell(0).textContent = result.mode;
-                row.insertCell(1).textContent = result.algorithm;
-                row.insertCell(2).textContent = result.avgWait;
-                row.insertCell(3).textContent = result.extFrag;
-                row.insertCell(4).textContent = result.intFrag;
-                row.insertCell(5).textContent = result.rejectionRate;
             });
         }
 
@@ -1145,272 +997,476 @@
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
 
-        function addRandomProcess() {
-            const size = Math.floor(Math.random() * 20) + 5; // 5-25 MB
-            const duration = Math.floor(Math.random() * 8) + 3; // 3-10 ciclos
+        // Funciones para guardar y cargar historial
+        function loadSimulationHistory() {
+            const savedHistory = localStorage.getItem('simulationHistory');
+            if (savedHistory) {
+                state.simulationHistory = JSON.parse(savedHistory);
+                updateComparisonTable();
+            }
+        }
+
+        function saveSimulationHistory() {
+            localStorage.setItem('simulationHistory', JSON.stringify(state.simulationHistory));
+        }
+
+        function clearSimulationHistory() {
+            state.simulationHistory = [];
+            saveSimulationHistory();
+            updateComparisonTable();
+            addLog('Historial de simulaciones eliminado', 'warning');
+        }
+
+        function updateComparisonTable() {
+            const tableBody = document.querySelector('#comparisonTable tbody');
             
+            if (state.simulationHistory.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="8" class="empty-state">No hay simulaciones para comparar</td></tr>';
+                return;
+            }
+            
+            tableBody.innerHTML = '';
+            
+            state.simulationHistory.forEach(sim => {
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td class="simulation-id">${sim.id}</td>
+                    <td>${new Date(sim.date).toLocaleString()}</td>
+                    <td>${sim.algorithm}</td>
+                    <td>${sim.memoryUsage}%</td>
+                    <td>${sim.fragmentation}%</td>
+                    <td>${sim.completedProcesses}</td>
+                    <td>${sim.avgWaitTime} ms</td>
+                    <td>${sim.efficiency}%</td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+        }
+
+        function saveCurrentSimulation() {
+            const memoryUsage = parseInt(document.getElementById('metricMemoryUsage').textContent);
+            const fragmentation = parseInt(document.getElementById('metricFragmentation').textContent);
+            const completedProcesses = parseInt(document.getElementById('detailCompleted').textContent);
+            const avgWaitTime = parseInt(document.getElementById('detailAvgWait').textContent);
+            const efficiency = parseInt(document.getElementById('detailEfficiency').textContent);
+            const algorithm = document.getElementById('algorithm').value;
+            
+            const simulation = {
+                id: state.currentSimulationId || generateSimulationId(),
+                date: new Date().toISOString(),
+                algorithm: algorithm,
+                memoryUsage: memoryUsage,
+                fragmentation: fragmentation,
+                completedProcesses: completedProcesses,
+                avgWaitTime: avgWaitTime,
+                efficiency: efficiency
+            };
+            
+            // Actualizar si ya existe, o agregar nueva
+            const existingIndex = state.simulationHistory.findIndex(s => s.id === simulation.id);
+            if (existingIndex >= 0) {
+                state.simulationHistory[existingIndex] = simulation;
+            } else {
+                state.simulationHistory.push(simulation);
+            }
+            
+            saveSimulationHistory();
+            updateComparisonTable();
+        }
+
+        function generateSimulationId() {
+            return 'SIM-' + Date.now().toString(36).toUpperCase();
+        }
+
+        function saveReport() {
+            saveCurrentSimulation();
+            
+            // Crear contenido del informe
+            const memoryUsage = document.getElementById('metricMemoryUsage').textContent;
+            const fragmentation = document.getElementById('metricFragmentation').textContent;
+            const activeProcesses = document.getElementById('metricActiveProcesses').textContent;
+            const algorithm = document.getElementById('algorithm').options[document.getElementById('algorithm').selectedIndex].text;
+            const memoryMode = document.getElementById('memoryMode').options[document.getElementById('memoryMode').selectedIndex].text;
+            
+            const reportContent = `
+INFORME DE SIMULACIÓN - SISTEMA DE GESTIÓN DE MEMORIA
+====================================================
+
+Fecha: ${new Date().toLocaleString()}
+ID de simulación: ${state.currentSimulationId || 'N/A'}
+
+CONFIGURACIÓN
+-------------
+Algoritmo: ${algorithm}
+Modo de memoria: ${memoryMode}
+Memoria total: ${document.getElementById('totalMemory').value} MB
+Tamaño de página: ${document.getElementById('pageSize').value} MB
+
+MÉTRICAS FINALES
+----------------
+Uso de memoria: ${memoryUsage}
+Fragmentación: ${fragmentation}
+Procesos activos: ${activeProcesses}
+Procesos completados: ${document.getElementById('detailCompleted').textContent}
+Tiempo de espera promedio: ${document.getElementById('detailAvgWait').textContent}
+Eficiencia de memoria: ${document.getElementById('detailEfficiency').textContent}
+
+HISTORIAL DE EVENTOS
+--------------------
+${document.getElementById('eventLog').textContent}
+
+====================================================
+Informe generado automáticamente por el Simulador de Gestión de Memoria
+            `;
+            
+            // Crear y descargar archivo
+            const blob = new Blob([reportContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `informe-simulacion-${new Date().toISOString().slice(0, 10)}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            addLog('Informe guardado y descargado correctamente', 'success');
+        }
+
+        // Funciones del simulador
+        function initializeSystem() {
+            const totalMemory = parseInt(document.getElementById('totalMemory').value);
+            state.memory = [{ start: 0, size: totalMemory, processId: null }];
+            state.processes = [];
+            state.nextPid = 1;
+            state.metrics = {
+                totalWaitTime: 0,
+                completedProcesses: 0,
+                totalMemoryUsed: 0,
+                totalFragmentation: 0,
+                measurements: 0
+            };
+            
+            updateMemoryVisualization();
+            updateProcessQueues();
+            updateMetrics();
+            updatePageTable();
+            
+            state.currentSimulationId = generateSimulationId();
+            addLog(`Sistema inicializado con ${totalMemory} MB de memoria`, 'success');
+        }
+
+        function addRandomProcess() {
+            const sizes = [5, 10, 15, 20, 25];
+            const size = sizes[Math.floor(Math.random() * sizes.length)];
             const process = {
-                id: 'P' + state.nextPid++,
+                id: state.nextPid++,
                 size: size,
-                duration: duration,
                 state: 'new',
-                allocatedMemory: null,
                 waitTime: 0,
-                startTime: null,
-                endTime: null
+                startTime: Date.now()
             };
             
             state.processes.push(process);
             updateProcessQueues();
-            tryAllocateMemory();
-            addLog(`Proceso ${process.id} creado (${size}MB, ${duration} ciclos)`, 'info');
+            addLog(`Proceso P${process.id} creado (${size} MB)`, 'info');
+            
+            // Intentar asignar memoria si la simulación está en ejecución
+            if (state.isRunning) {
+                allocateMemory();
+            }
         }
 
-        function tryAllocateMemory() {
+        function allocateMemory() {
+            const algorithm = document.getElementById('algorithm').value;
+            const memoryMode = document.getElementById('memoryMode').value;
+            
+            // Buscar procesos nuevos para asignar
             const newProcesses = state.processes.filter(p => p.state === 'new');
             
             for (const process of newProcesses) {
-                state.metrics.allocationAttempts++; // Contar intento
-                if (allocateMemory(process)) {
-                    process.state = 'ready';
-                    addLog(`Proceso ${process.id} asignado a memoria`, 'success');
+                let allocated = false;
+                
+                if (memoryMode === 'paging') {
+                    allocated = allocateWithPaging(process, algorithm);
                 } else {
-                    state.metrics.failedAllocations++; // Contar fallo
-                    addLog(`Memoria insuficiente para ${process.id}`, 'warning');
+                    allocated = allocateWithCompaction(process, algorithm);
+                }
+                
+                if (allocated) {
+                    process.state = 'ready';
+                    addLog(`Memoria asignada a P${process.id} (${process.size} MB)`, 'success');
+                }
+            }
+            
+            updateMemoryVisualization();
+            updateProcessQueues();
+            updateMetrics();
+            updatePageTable();
+        }
+
+        function allocateWithPaging(process, algorithm) {
+            const pageSize = parseInt(document.getElementById('pageSize').value);
+            const pagesNeeded = Math.ceil(process.size / pageSize);
+            let allocatedFrames = [];
+            
+            // Buscar marcos libres
+            for (let i = 0; i < state.memory.length && allocatedFrames.length < pagesNeeded; i++) {
+                const block = state.memory[i];
+                if (block.processId === null && block.size >= pageSize) {
+                    allocatedFrames.push({
+                        start: block.start,
+                        size: pageSize,
+                        processId: process.id
+                    });
+                    
+                    // Actualizar el bloque de memoria
+                    block.start += pageSize;
+                    block.size -= pageSize;
+                    
+                    // Si el bloque queda vacío, eliminarlo
+                    if (block.size === 0) {
+                        state.memory.splice(i, 1);
+                        i--;
+                    }
+                }
+            }
+            
+            if (allocatedFrames.length === pagesNeeded) {
+                // Agregar los marcos asignados a la memoria
+                state.memory.push(...allocatedFrames);
+                state.memory.sort((a, b) => a.start - b.start);
+                
+                process.allocatedFrames = allocatedFrames;
+                return true;
+            }
+            
+            return false;
+        }
+
+        function allocateWithCompaction(process, algorithm) {
+            // Implementación simplificada de compactación
+            let bestBlockIndex = -1;
+            
+            if (algorithm === 'first-fit') {
+                bestBlockIndex = state.memory.findIndex(block => 
+                    block.processId === null && block.size >= process.size
+                );
+            } else if (algorithm === 'best-fit') {
+                let minSize = Infinity;
+                state.memory.forEach((block, index) => {
+                    if (block.processId === null && block.size >= process.size && block.size < minSize) {
+                        minSize = block.size;
+                        bestBlockIndex = index;
+                    }
+                });
+            } else if (algorithm === 'worst-fit') {
+                let maxSize = -1;
+                state.memory.forEach((block, index) => {
+                    if (block.processId === null && block.size >= process.size && block.size > maxSize) {
+                        maxSize = block.size;
+                        bestBlockIndex = index;
+                    }
+                });
+            }
+            
+            if (bestBlockIndex !== -1) {
+                const block = state.memory[bestBlockIndex];
+                
+                // Asignar proceso al bloque
+                state.memory.splice(bestBlockIndex, 1);
+                
+                // Si el bloque es más grande que el proceso, dividirlo
+                if (block.size > process.size) {
+                    state.memory.splice(bestBlockIndex, 0, 
+                        { start: block.start + process.size, size: block.size - process.size, processId: null }
+                    );
+                }
+                
+                state.memory.splice(bestBlockIndex, 0, 
+                    { start: block.start, size: process.size, processId: process.id }
+                );
+                
+                return true;
+            }
+            
+            return false;
+        }
+
+        function runProcesses() {
+            // Mover un proceso de ready a running
+            const readyProcesses = state.processes.filter(p => p.state === 'ready');
+            if (readyProcesses.length > 0) {
+                const process = readyProcesses[0];
+                process.state = 'running';
+                addLog(`Proceso P${process.id} en ejecución`, 'info');
+            }
+            
+            // Simular finalización de procesos en ejecución
+            const runningProcesses = state.processes.filter(p => p.state === 'running');
+            for (const process of runningProcesses) {
+                // Simular que el proceso termina con cierta probabilidad
+                if (Math.random() < 0.3) {
+                    process.state = 'terminated';
+                    
+                    // Liberar memoria
+                    freeMemory(process.id);
+                    
+                    // Calcular tiempo de espera
+                    const waitTime = Date.now() - process.startTime;
+                    state.metrics.totalWaitTime += waitTime;
+                    state.metrics.completedProcesses++;
+                    
+                    addLog(`Proceso P${process.id} terminado (tiempo de espera: ${waitTime} ms)`, 'success');
                 }
             }
             
             updateProcessQueues();
-            updateMemoryVisualization();
             updateMetrics();
         }
 
-        function allocateMemory(process) {
-            const mode = document.getElementById('memoryMode').value;
-            
-            if (mode === 'paging') {
-                return allocatePaging(process);
-            } else {
-                return allocateCompaction(process);
-            }
-        }
-
-        function allocatePaging(process) {
-            const pageSize = parseInt(document.getElementById('pageSize').value);
-            const pagesNeeded = Math.ceil(process.size / pageSize);
-            const freeFrames = [];
-            
-            // Buscar marcos libres
+        function freeMemory(processId) {
+            // Liberar memoria asignada al proceso
             for (let i = 0; i < state.memory.length; i++) {
-                if (state.memory[i].type === 'free' && state.memory[i].size >= pageSize) {
-                    const framesInBlock = Math.floor(state.memory[i].size / pageSize);
-                    for (let j = 0; j < framesInBlock; j++) {
-                        // Calcular el inicio real del marco libre
-                        const frameStart = state.memory[i].start + j * pageSize;
-                        
-                        // Asegurarse de que el marco no se superponga con otro ya asignado
-                        const isAllocated = state.memory.some(b => b.type === 'allocated' && b.start === frameStart && b.size === pageSize);
-                        if (!isAllocated) {
-                             freeFrames.push({
-                                blockIndex: i,
-                                start: frameStart,
-                                size: pageSize
-                            });
-                        }
-
-                        if (freeFrames.length >= pagesNeeded) break;
-                    }
-                }
-                if (freeFrames.length >= pagesNeeded) break;
-            }
-            
-            if (freeFrames.length < pagesNeeded) return false;
-            
-            // Asignar páginas
-            process.allocatedMemory = freeFrames.slice(0, pagesNeeded);
-            
-            // Actualizar la memoria
-            for (const frame of process.allocatedMemory) {
-                const blockIndex = state.memory.findIndex(b => 
-                    b.start <= frame.start && b.start + b.size > frame.start && b.type === 'free');
-                
-                if (blockIndex === -1) continue; // Ya no es libre
-
-                const block = state.memory[blockIndex];
-                
-                // 1. Crear el bloque asignado (la página)
-                const assignedBlock = {
-                    id: 'page-' + process.id + '-' + frame.start,
-                    start: frame.start,
-                    size: pageSize,
-                    processId: process.id,
-                    type: 'allocated'
-                };
-
-                // 2. Manejar el fragmento restante antes del bloque asignado (debería ser 0)
-                const remainingBeforeSize = frame.start - block.start;
-                if (remainingBeforeSize > 0) {
-                    state.memory.splice(blockIndex, 0, {
-                        id: 'free-' + Date.now() + '-pre',
-                        start: block.start,
-                        size: remainingBeforeSize,
-                        processId: null,
-                        type: 'free'
-                    });
-                }
-
-                // 3. Manejar el fragmento restante después del bloque asignado
-                const remainingAfterSize = (block.start + block.size) - (frame.start + pageSize);
-                
-                // Encontrar el índice correcto para el splice después de la posible inserción 'pre'
-                const currentBlockIndex = state.memory.findIndex(b => b.start === block.start && b.type === 'free');
-                if (currentBlockIndex === -1) continue;
-
-                if (remainingAfterSize > 0) {
-                    // Reemplazar el bloque libre restante con el asignado y el fragmento libre posterior
-                    state.memory.splice(currentBlockIndex, 1, assignedBlock, {
-                        id: 'free-' + Date.now() + '-post',
-                        start: frame.start + pageSize,
-                        size: remainingAfterSize,
-                        processId: null,
-                        type: 'free'
-                    });
-                } else {
-                    // Reemplazar el bloque libre restante con solo el asignado
-                    state.memory.splice(currentBlockIndex, 1, assignedBlock);
+                if (state.memory[i].processId === processId) {
+                    state.memory[i].processId = null;
                 }
             }
             
-            // Eliminar duplicados y reorganizar (una compactación simulada para paginación)
-            compactFreeBlocks();
-            state.memory.sort((a, b) => a.start - b.start);
+            // Compactar bloques libres adyacentes
+            for (let i = 0; i < state.memory.length - 1; i++) {
+                const current = state.memory[i];
+                const next = state.memory[i + 1];
+                
+                if (current.processId === null && next.processId === null) {
+                    current.size += next.size;
+                    state.memory.splice(i + 1, 1);
+                    i--;
+                }
+            }
             
+            updateMemoryVisualization();
             updatePageTable();
-            return true;
-        }
-
-        function allocateCompaction(process) {
-            const algorithm = document.getElementById('algorithm').value;
-            let targetBlock = -1;
-            
-            switch (algorithm) {
-                case 'first-fit':
-                    targetBlock = state.memory.findIndex(b => b.type === 'free' && b.size >= process.size);
-                    break;
-                case 'best-fit':
-                    targetBlock = state.memory.reduce((best, block, idx) => {
-                        if (block.type === 'free' && block.size >= process.size) {
-                            if (best === -1 || block.size < state.memory[best].size) return idx;
-                        }
-                        return best;
-                    }, -1);
-                    break;
-                case 'worst-fit':
-                    targetBlock = state.memory.reduce((best, block, idx) => {
-                        if (block.type === 'free' && block.size >= process.size) {
-                            if (best === -1 || block.size > state.memory[best].size) return idx;
-                        }
-                        return best;
-                    }, -1);
-                    break;
-            }
-            
-            if (targetBlock === -1) return false;
-            
-            const block = state.memory[targetBlock];
-            process.allocatedMemory = [{
-                start: block.start,
-                size: process.size,
-                blockIndex: targetBlock
-            }];
-            
-            if (block.size > process.size) {
-                // Dividir el bloque
-                state.memory.splice(targetBlock + 1, 0, {
-                    id: 'free-' + Date.now(),
-                    start: block.start + process.size,
-                    size: block.size - process.size,
-                    processId: null,
-                    type: 'free'
-                });
-            }
-            
-            state.memory[targetBlock] = {
-                id: 'alloc-' + process.id,
-                start: block.start,
-                size: process.size,
-                processId: process.id,
-                type: 'allocated'
-            };
-            
-            return true;
         }
 
         function updateMemoryVisualization() {
-            const viz = document.getElementById('memoryVisualization');
+            const visualization = document.getElementById('memoryVisualization');
             const totalMemory = parseInt(document.getElementById('totalMemory').value);
             
-            viz.innerHTML = '';
+            visualization.innerHTML = '';
             
             if (state.memory.length === 0) {
-                viz.innerHTML = '<div class="empty-state">Memoria no inicializada</div>';
+                visualization.innerHTML = '<div class="empty-state">Memoria no inicializada</div>';
                 return;
             }
             
             state.memory.forEach(block => {
-                const blockElem = document.createElement('div');
-                blockElem.className = `memory-block ${block.type === 'free' ? 'memory-free' : ''}`;
-                blockElem.style.width = `${(block.size / totalMemory) * 100}%`;
-                blockElem.style.left = `${(block.start / totalMemory) * 100}%`;
+                const blockElement = document.createElement('div');
+                const width = (block.size / totalMemory) * 100;
                 
-                if (block.type === 'allocated') {
-                    blockElem.style.backgroundColor = getProcessColor(block.processId);
-                    blockElem.textContent = block.processId || '?';
+                blockElement.className = `memory-block ${block.processId === null ? 'memory-free' : ''}`;
+                blockElement.style.left = `${(block.start / totalMemory) * 100}%`;
+                blockElement.style.width = `${width}%`;
+                
+                if (block.processId !== null) {
+                    blockElement.style.background = `linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))`;
+                    blockElement.textContent = `P${block.processId}`;
                 } else {
-                    blockElem.textContent = `${block.size}MB libre`;
+                    blockElement.style.background = `var(--bg-tertiary)`;
+                    blockElement.textContent = `Libre (${block.size} MB)`;
                 }
                 
-                viz.appendChild(blockElem);
+                visualization.appendChild(blockElement);
             });
-        }
-
-        function getProcessColor(pid) {
-            const colors = [
-                '#5d5dff', '#ff6b6b', '#51cf66', '#ffd43b', 
-                '#cc5de8', '#22b8cf', '#94d82d', '#ff922b'
-            ];
-            const index = pid ? parseInt(pid.substring(1)) % colors.length : 0;
-            return colors[index];
         }
 
         function updateProcessQueues() {
-            updateQueue('queueNew', state.processes.filter(p => p.state === 'new'), 'new');
-            updateQueue('queueReady', state.processes.filter(p => p.state === 'ready'), 'ready');
-            updateQueue('queueRunning', state.processes.filter(p => p.state === 'running'), 'running');
-            updateQueue('queueTerminated', state.processes.filter(p => p.state === 'terminated'), 'terminated');
+            const queues = {
+                new: document.getElementById('queueNew'),
+                ready: document.getElementById('queueReady'),
+                running: document.getElementById('queueRunning'),
+                terminated: document.getElementById('queueTerminated')
+            };
+            
+            // Limpiar colas
+            Object.values(queues).forEach(queue => {
+                queue.innerHTML = '';
+            });
+            
+            // Agregar procesos a las colas
+            state.processes.forEach(process => {
+                const processElement = document.createElement('div');
+                processElement.className = `process process-${process.state}`;
+                
+                processElement.innerHTML = `
+                    <div>P${process.id}</div>
+                    <div class="process-info">${process.size} MB</div>
+                `;
+                
+                queues[process.state].appendChild(processElement);
+            });
+            
+            // Mostrar estado vacío si no hay procesos
+            Object.entries(queues).forEach(([state, queue]) => {
+                if (queue.children.length === 0) {
+                    const emptyElement = document.createElement('div');
+                    emptyElement.className = 'empty-state';
+                    emptyElement.textContent = 'Vacío';
+                    queue.appendChild(emptyElement);
+                }
+            });
         }
 
-        function updateQueue(queueId, processes, stateClass) {
-            const queue = document.getElementById(queueId);
-            queue.innerHTML = '';
+        function updateMetrics() {
+            const totalMemory = parseInt(document.getElementById('totalMemory').value);
             
-            if (processes.length === 0) {
-                queue.innerHTML = '<div class="empty-state">Vacío</div>';
-                return;
-            }
+            // Calcular uso de memoria
+            const usedMemory = state.memory
+                .filter(block => block.processId !== null)
+                .reduce((sum, block) => sum + block.size, 0);
             
-            processes.forEach(process => {
-                const processElem = document.createElement('div');
-                processElem.className = `process process-${stateClass}`;
-                processElem.innerHTML = `
-                    <span>${process.id}</span>
-                    <span class="process-info">${process.size}MB</span>
-                `;
-                if (process.state === 'running') {
-                    processElem.innerHTML += `<span class="process-info">${process.duration}c</span>`;
-                }
-                queue.appendChild(processElem);
-            });
+            const memoryUsage = Math.round((usedMemory / totalMemory) * 100);
+            document.getElementById('metricMemoryUsage').textContent = `${memoryUsage}%`;
+            
+            // Calcular fragmentación
+            const freeBlocks = state.memory.filter(block => block.processId === null);
+            const totalFree = freeBlocks.reduce((sum, block) => sum + block.size, 0);
+            const fragmentation = freeBlocks.length > 1 ? 
+                Math.round(((totalFree - Math.max(...freeBlocks.map(b => b.size))) / totalFree) * 100) : 0;
+            
+            document.getElementById('metricFragmentation').textContent = `${fragmentation}%`;
+            
+            // Procesos activos
+            const activeProcesses = state.processes.filter(p => p.state !== 'terminated').length;
+            document.getElementById('metricActiveProcesses').textContent = activeProcesses;
+            
+            // Métricas detalladas
+            const avgWaitTime = state.metrics.completedProcesses > 0 ? 
+                Math.round(state.metrics.totalWaitTime / state.metrics.completedProcesses) : 0;
+            
+            document.getElementById('detailAvgWait').textContent = `${avgWaitTime} ms`;
+            document.getElementById('detailExtFrag').textContent = `${fragmentation}%`;
+            
+            // Fragmentación interna (simulada)
+            const intFrag = Math.round(Math.random() * 20);
+            document.getElementById('detailIntFrag').textContent = `${intFrag}%`;
+            
+            document.getElementById('detailCompleted').textContent = state.metrics.completedProcesses;
+            
+            // Procesos bloqueados (simulado)
+            const blocked = Math.round(Math.random() * 5);
+            document.getElementById('detailBlocked').textContent = blocked;
+            
+            // Eficiencia (simulada)
+            const efficiency = Math.max(0, 100 - fragmentation - intFrag - blocked * 5);
+            document.getElementById('detailEfficiency').textContent = `${efficiency}%`;
+            
+            // Actualizar métricas para el historial
+            state.metrics.totalMemoryUsed += usedMemory;
+            state.metrics.totalFragmentation += fragmentation;
+            state.metrics.measurements++;
         }
 
         function updatePageTable() {
@@ -1418,19 +1474,21 @@
             tableBody.innerHTML = '';
             
             const pages = [];
-            state.processes.forEach(process => {
-                if (process.allocatedMemory) {
-                    process.allocatedMemory.forEach((mem, idx) => {
-                        // Solo mostrar si la página no está en un proceso terminado
-                        if (process.state !== 'terminated') {
-                            pages.push({
-                                pid: process.id,
-                                page: idx,
-                                frame: `${mem.start}-${mem.start + mem.size}`,
-                                state: process.state
-                            });
-                        }
-                    });
+            
+            // Recopilar información de páginas
+            state.memory.forEach(block => {
+                if (block.processId !== null) {
+                    const pageSize = parseInt(document.getElementById('pageSize').value);
+                    const pageCount = Math.ceil(block.size / pageSize);
+                    
+                    for (let i = 0; i < pageCount; i++) {
+                        pages.push({
+                            pid: block.processId,
+                            page: i,
+                            frame: Math.floor(block.start / pageSize) + i,
+                            status: 'Asignada'
+                        });
+                    }
                 }
             });
             
@@ -1440,127 +1498,52 @@
             }
             
             pages.forEach(page => {
-                const row = tableBody.insertRow();
-                row.insertCell(0).textContent = page.pid;
-                row.insertCell(1).textContent = page.page;
-                row.insertCell(2).textContent = page.frame;
-                row.insertCell(3).textContent = page.state;
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>P${page.pid}</td>
+                    <td>${page.page}</td>
+                    <td>${page.frame}</td>
+                    <td>${page.status}</td>
+                `;
+                tableBody.appendChild(row);
             });
-        }
-
-        function calculateRejectionRate() {
-            if (state.metrics.allocationAttempts === 0) return 0;
-            return Math.round((state.metrics.failedAllocations / state.metrics.allocationAttempts) * 100);
-        }
-
-        function updateMetrics() {
-            const memoryUsage = calculateMemoryUsage();
-            const fragmentation = calculateFragmentation();
-            const activeProcesses = state.processes.filter(p => 
-                p.state === 'ready' || p.state === 'running').length;
-            
-            // Métricas principales
-            document.getElementById('metricMemoryUsage').textContent = `${memoryUsage}%`;
-            document.getElementById('metricFragmentation').textContent = `${fragmentation}%`;
-            document.getElementById('metricActiveProcesses').textContent = activeProcesses;
-            
-            // Métricas detalladas
-            const avgWait = state.metrics.completedProcesses > 0 ? 
-                Math.round(state.metrics.totalWaitTime / state.metrics.completedProcesses) : 0;
-            const extFrag = calculateExternalFragmentation();
-            const intFrag = calculateInternalFragmentation();
-            const blocked = state.processes.filter(p => p.state === 'new').length;
-            
-            // Se corrige el error al evitar llamar a 'detailEfficiency'
-            
-            document.getElementById('detailAvgWait').textContent = `${avgWait} ms`;
-            document.getElementById('detailExtFrag').textContent = `${extFrag}%`;
-            document.getElementById('detailIntFrag').textContent = `${intFrag}%`;
-            document.getElementById('detailCompleted').textContent = state.metrics.completedProcesses;
-            document.getElementById('detailBlocked').textContent = blocked;
-            document.getElementById('detailRejectionRate').textContent = `${calculateRejectionRate()}%`;
-        }
-
-        function calculateMemoryUsage() {
-            const used = state.memory
-                .filter(b => b.type === 'allocated')
-                .reduce((sum, b) => sum + b.size, 0);
-            const total = parseInt(document.getElementById('totalMemory').value);
-            return Math.round((used / total) * 100);
-        }
-
-        function calculateFragmentation() {
-            const mode = document.getElementById('memoryMode').value;
-            
-            // En la vista principal, la "Fragmentación" suele ser la suma de la Externa e Interna
-            const ext = calculateExternalFragmentation();
-            const int = calculateInternalFragmentation();
-
-            // Nota: En la gestión de memoria se suele reportar una u otra, pero para una métrica única:
-            if (mode === 'paging') return int;
-            if (mode === 'compaction') return ext;
-            
-            return Math.round(ext + int); // Combinar como fallback
-        }
-
-        function calculateExternalFragmentation() {
-            const mode = document.getElementById('memoryMode').value;
-            if (mode === 'paging') return 0; // La paginación evita la fragmentación externa
-
-            const freeBlocks = state.memory.filter(b => b.type === 'free');
-            if (freeBlocks.length <= 1) return 0;
-            
-            const totalFree = freeBlocks.reduce((sum, b) => sum + b.size, 0);
-            if (totalFree === 0) return 0;
-
-            const largestFree = Math.max(...freeBlocks.map(b => b.size));
-            
-            // Se calcula como el total de espacio libre menos el hueco más grande, dividido por el espacio libre total.
-            return Math.round(((totalFree - largestFree) / totalFree) * 100);
-        }
-
-        function calculateInternalFragmentation() {
-            const totalMem = parseInt(document.getElementById('totalMemory').value);
-            if (totalMem === 0) return 0;
-            
-            const mode = document.getElementById('memoryMode').value;
-            let internalFrag = 0;
-            
-            if (mode === 'paging') {
-                const pageSize = parseInt(document.getElementById('pageSize').value);
-                state.processes
-                    .filter(p => p.allocatedMemory && p.state !== 'terminated')
-                    .forEach(p => {
-                        const pagesNeeded = Math.ceil(p.size / pageSize);
-                        // El espacio asignado es un múltiplo del tamaño de página.
-                        internalFrag += (pagesNeeded * pageSize) - p.size;
-                    });
-            } else {
-                internalFrag += 0; 
-            }
-            
-            return Math.round((internalFrag / totalMem) * 100);
         }
 
         function addLog(message, type = 'info') {
             const log = document.getElementById('eventLog');
             const entry = document.createElement('div');
-            entry.className = `log-entry log-${type}`;
-            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
-            log.prepend(entry); // Usar prepend para que los logs más nuevos estén arriba
-            log.scrollTop = 0; // Mover al inicio para ver el más reciente
+            entry.className = `log-entry ${type ? 'log-' + type : ''}`;
+            
+            const timestamp = new Date().toLocaleTimeString();
+            entry.textContent = `[${timestamp}] ${message}`;
+            
+            log.appendChild(entry);
+            log.scrollTop = log.scrollHeight;
         }
 
         function startSimulation() {
             if (state.isRunning) return;
             
             state.isRunning = true;
+            document.getElementById('systemStatus').innerHTML = `
+                <span class="status-indicator status-running"></span>
+                Ejecutándose
+            `;
+            
             document.getElementById('btnStart').disabled = true;
             document.getElementById('btnPause').disabled = false;
-            document.getElementById('systemStatus').innerHTML = 
-                '<span class="status-indicator status-running"></span>Ejecutando';
             
-            state.interval = setInterval(simulationStep, 1000);
+            state.interval = setInterval(() => {
+                allocateMemory();
+                runProcesses();
+                updateMetrics();
+                
+                // Guardar estado periódicamente
+                if (Math.random() < 0.1) {
+                    saveCurrentSimulation();
+                }
+            }, 1000);
+            
             addLog('Simulación iniciada', 'success');
         }
 
@@ -1569,10 +1552,14 @@
             
             state.isRunning = false;
             clearInterval(state.interval);
+            
+            document.getElementById('systemStatus').innerHTML = `
+                <span class="status-indicator status-paused"></span>
+                Pausado
+            `;
+            
             document.getElementById('btnStart').disabled = false;
             document.getElementById('btnPause').disabled = true;
-            document.getElementById('systemStatus').innerHTML = 
-                '<span class="status-indicator status-paused"></span>Pausado';
             
             addLog('Simulación pausada', 'warning');
         }
@@ -1581,150 +1568,32 @@
             state.isRunning = false;
             clearInterval(state.interval);
             
-            state.processes = [];
-            state.nextPid = 1;
-            state.metrics = {
-                totalWaitTime: 0,
-                completedProcesses: 0,
-                totalMemoryUsed: 0,
-                totalFragmentation: 0,
-                measurements: 0,
-                allocationAttempts: 0,
-                failedAllocations: 0
-            };
+            document.getElementById('systemStatus').innerHTML = `
+                <span class="status-indicator status-stopped"></span>
+                Detenido
+            `;
             
             document.getElementById('btnStart').disabled = false;
             document.getElementById('btnPause').disabled = true;
-            document.getElementById('systemStatus').innerHTML = 
-                '<span class="status-indicator status-stopped"></span>Detenido';
             
             initializeSystem();
-            updateProcessQueues();
-            updatePageTable();
-            updateMetrics();
-            document.getElementById('eventLog').innerHTML = '';
             addLog('Simulación reiniciada', 'info');
-        }
-
-        function simulationStep() {
-            // Avanzar tiempo de espera para procesos nuevos
-            state.processes
-                .filter(p => p.state === 'new')
-                .forEach(p => p.waitTime++);
-            
-            // Ejecutar procesos
-            const runningProcesses = state.processes.filter(p => p.state === 'running');
-            
-            if (runningProcesses.length === 0) {
-                // Asignar un proceso listo para ejecutar
-                const readyProcess = state.processes.find(p => p.state === 'ready');
-                if (readyProcess) {
-                    readyProcess.state = 'running';
-                    addLog(`Proceso ${readyProcess.id} comenzó a ejecutar`, 'info');
-                }
-            } else {
-                // Avanzar ejecución de procesos en ejecución
-                runningProcesses.forEach(process => {
-                    process.duration--;
-                    
-                    if (process.duration <= 0) {
-                        process.state = 'terminated';
-                        addLog(`Proceso ${process.id} completado`, 'success');
-                        
-                        // Liberar memoria
-                        freeMemory(process);
-                        
-                        // Actualizar métricas
-                        state.metrics.completedProcesses++;
-                        state.metrics.totalWaitTime += process.waitTime;
-                        
-                        // Intentar asignar memoria a procesos nuevos
-                        tryAllocateMemory();
-                    }
-                });
-            }
-            
-            // Intentar asignar procesos nuevos a memoria
-            tryAllocateMemory();
-            
-            // Agregar proceso aleatorio ocasionalmente
-            if (Math.random() < 0.3) {
-                addRandomProcess();
-            }
-            
-            // Actualizar visualizaciones
-            updateProcessQueues();
-            updateMemoryVisualization();
-            updateMetrics();
-        }
-
-        function freeMemory(process) {
-            if (!process.allocatedMemory) return;
-            
-            process.allocatedMemory.forEach(mem => {
-                const blockIndex = state.memory.findIndex(b => 
-                    b.start === mem.start && b.size === mem.size && b.processId === process.id);
-                
-                if (blockIndex !== -1) {
-                    state.memory[blockIndex] = {
-                        id: 'free-' + Date.now(),
-                        start: mem.start,
-                        size: mem.size,
-                        processId: null,
-                        type: 'free'
-                    };
-                }
-            });
-            
-            // Compactar bloques libres adyacentes
-            compactFreeBlocks();
-            // Asegurarse de que el proceso ya no tenga memoria asignada
-            process.allocatedMemory = null; 
-        }
-
-        function compactFreeBlocks() {
-            state.memory.sort((a, b) => a.start - b.start);
-            
-            for (let i = state.memory.length - 1; i > 0; i--) {
-                const current = state.memory[i];
-                const previous = state.memory[i - 1];
-                
-                if (current.type === 'free' && previous.type === 'free' &&
-                    previous.start + previous.size === current.start) {
-                    previous.size += current.size;
-                    state.memory.splice(i, 1);
-                }
-            }
         }
 
         function runStressTest() {
             addLog('Iniciando prueba de estrés...', 'warning');
             
+            // Agregar múltiples procesos rápidamente
             for (let i = 0; i < 10; i++) {
-                addRandomProcess();
+                setTimeout(() => {
+                    addRandomProcess();
+                }, i * 200);
             }
             
+            // Iniciar simulación si no está en ejecución
             if (!state.isRunning) {
-                startSimulation();
+                setTimeout(startSimulation, 2100);
             }
-        }
-
-        function initializeSystem() {
-            const totalMemory = parseInt(document.getElementById('totalMemory').value);
-            state.memory = [{
-                id: 'free-0',
-                start: 0,
-                size: totalMemory,
-                processId: null,
-                type: 'free'
-            }];
-            
-            // Restablecer contadores de rechazo al cambiar configuración
-            state.metrics.allocationAttempts = 0;
-            state.metrics.failedAllocations = 0;
-
-            updateMemoryVisualization();
-            updateMetrics();
         }
     </script>
 </body>
